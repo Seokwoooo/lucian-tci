@@ -1,0 +1,52 @@
+{
+  "retrievedDate": "2026-10-16",
+  "dateBasis": "Client-provided date, Asia/Seoul. No inference from the host clock.",
+  "datasetVersion": "2026-10-16.1",
+  "sources": [
+    {
+      "file": "newTCIKey.htm",
+      "url": "https://ipip.ori.org/newTCIKey.htm",
+      "sha256": "092d0cffbb62d1b1945af36704400bba2d6c1b3190b0720410012ba376226aa6",
+      "bytes": 52912,
+      "retrievedDate": "2026-10-16",
+      "retrievedBy": "parent session before dataset assignment",
+      "encoding": "iso-8859-1"
+    },
+    {
+      "file": "newTCITable.htm",
+      "url": "https://ipip.ori.org/newTCITable.htm",
+      "sha256": "af580bcdb735e496014e5e61dd7ba9aea9553e5270d866078e057db7a17a422b",
+      "bytes": 131522,
+      "retrievedDate": "2026-10-16",
+      "retrievedBy": "parent session before dataset assignment",
+      "encoding": "windows-1252"
+    },
+    {
+      "file": "newScoringInstructions.htm",
+      "url": "https://ipip.ori.org/newScoringInstructions.htm",
+      "sha256": "9429ac6d94589173a704c1079afe62833f8fcc5d0fe48e6df595b9022373af87",
+      "bytes": 2172,
+      "retrievedDate": "2026-10-16",
+      "retrievedBy": "dataset agent",
+      "encoding": "iso-8859-1"
+    },
+    {
+      "file": "newPermission.htm",
+      "url": "https://ipip.ori.org/newPermission.htm",
+      "sha256": "15e3d162504ce920c1da2476941b2a538f2d06075b514324de8cbeab874cc198",
+      "bytes": 1046,
+      "retrievedDate": "2026-10-16",
+      "retrievedBy": "dataset agent",
+      "encoding": "iso-8859-1"
+    },
+    {
+      "file": "newNorms.htm",
+      "url": "https://ipip.ori.org/newNorms.htm",
+      "sha256": "6edf1dcf29d8bd93cd25634caae3bb4b06b285eb0f368a4c9483b74ab70bf670",
+      "bytes": 4859,
+      "retrievedDate": "2026-10-16",
+      "retrievedBy": "dataset agent",
+      "encoding": "iso-8859-1"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+node_modules/
+dist/
+output/
+test-results/
+playwright-report/
+.vercel/
+.agents/
+.superpowers/
+skills-lock.json
+.env*
+!.env.example
+.DS_Store
+*.tsbuildinfo

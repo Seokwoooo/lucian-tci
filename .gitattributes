@@ -1,0 +1,4 @@
+# Frozen official pages are byte-for-byte evidence. Preserve original CRLF and spacing.
+provenance/*.htm -text -whitespace
+public/fonts/*.woff2 binary
+public/*.png binary

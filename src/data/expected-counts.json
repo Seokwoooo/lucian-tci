@@ -1,0 +1,196 @@
+{
+  "version": "2026-10-16.1",
+  "source": "https://ipip.ori.org/newTCITable.htm",
+  "total": 289,
+  "domains": {
+    "NS": 34,
+    "HA": 39,
+    "RD": 40,
+    "P": 39,
+    "SD": 48,
+    "C": 52,
+    "ST": 37
+  },
+  "subscales": {
+    "NS1": {
+      "domain": "NS",
+      "positive": 7,
+      "negative": 3,
+      "count": 10
+    },
+    "NS2": {
+      "domain": "NS",
+      "positive": 4,
+      "negative": 6,
+      "count": 10
+    },
+    "NS3": {
+      "domain": "NS",
+      "positive": 2,
+      "negative": 2,
+      "count": 4
+    },
+    "NS4": {
+      "domain": "NS",
+      "positive": 6,
+      "negative": 4,
+      "count": 10
+    },
+    "HA1": {
+      "domain": "HA",
+      "positive": 5,
+      "negative": 5,
+      "count": 10
+    },
+    "HA2": {
+      "domain": "HA",
+      "positive": 3,
+      "negative": 7,
+      "count": 10
+    },
+    "HA3": {
+      "domain": "HA",
+      "positive": 5,
+      "negative": 5,
+      "count": 10
+    },
+    "HA4": {
+      "domain": "HA",
+      "positive": 5,
+      "negative": 4,
+      "count": 9
+    },
+    "RD1": {
+      "domain": "RD",
+      "positive": 7,
+      "negative": 3,
+      "count": 10
+    },
+    "RD2": {
+      "domain": "RD",
+      "positive": 5,
+      "negative": 5,
+      "count": 10
+    },
+    "RD3": {
+      "domain": "RD",
+      "positive": 5,
+      "negative": 5,
+      "count": 10
+    },
+    "RD4": {
+      "domain": "RD",
+      "positive": 5,
+      "negative": 5,
+      "count": 10
+    },
+    "P1": {
+      "domain": "P",
+      "positive": 6,
+      "negative": 4,
+      "count": 10
+    },
+    "P2": {
+      "domain": "P",
+      "positive": 6,
+      "negative": 3,
+      "count": 9
+    },
+    "P3": {
+      "domain": "P",
+      "positive": 9,
+      "negative": 1,
+      "count": 10
+    },
+    "P4": {
+      "domain": "P",
+      "positive": 8,
+      "negative": 2,
+      "count": 10
+    },
+    "S1": {
+      "domain": "SD",
+      "positive": 1,
+      "negative": 9,
+      "count": 10
+    },
+    "S2": {
+      "domain": "SD",
+      "positive": 5,
+      "negative": 5,
+      "count": 10
+    },
+    "S3": {
+      "domain": "SD",
+      "positive": 5,
+      "negative": 5,
+      "count": 10
+    },
+    "S4": {
+      "domain": "SD",
+      "positive": 2,
+      "negative": 6,
+      "count": 8
+    },
+    "S5": {
+      "domain": "SD",
+      "positive": 5,
+      "negative": 5,
+      "count": 10
+    },
+    "C1": {
+      "domain": "C",
+      "positive": 6,
+      "negative": 6,
+      "count": 12
+    },
+    "C2": {
+      "domain": "C",
+      "positive": 8,
+      "negative": 0,
+      "count": 8
+    },
+    "C3": {
+      "domain": "C",
+      "positive": 6,
+      "negative": 6,
+      "count": 12
+    },
+    "C4": {
+      "domain": "C",
+      "positive": 3,
+      "negative": 7,
+      "count": 10
+    },
+    "C5": {
+      "domain": "C",
+      "positive": 6,
+      "negative": 4,
+      "count": 10
+    },
+    "ST1": {
+      "domain": "ST",
+      "positive": 8,
+      "negative": 3,
+      "count": 11
+    },
+    "ST2": {
+      "domain": "ST",
+      "positive": 7,
+      "negative": 2,
+      "count": 9
+    },
+    "ST4": {
+      "domain": "ST",
+      "positive": 6,
+      "negative": 3,
+      "count": 9
+    },
+    "ST5": {
+      "domain": "ST",
+      "positive": 6,
+      "negative": 2,
+      "count": 8
+    }
+  }
+}

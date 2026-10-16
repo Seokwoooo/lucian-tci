@@ -1,0 +1,597 @@
+{
+  "retrievedDate": "2026-10-16",
+  "dateBasis": "Client-provided date, Asia/Seoul; no host clock inference.",
+  "referenceRepository": "https://github.com/stmueller/OpenScales",
+  "referenceCommit": "d555b04a1961181a63f91b534bc1096bcbd1dcdc",
+  "referenceFile": "https://raw.githubusercontent.com/stmueller/OpenScales/d555b04a1961181a63f91b534bc1096bcbd1dcdc/scales/ipip/IPIP-TCI/IPIP-TCI.osd",
+  "referenceFileSha256": "6eec14b775a3e546a80541f009ba380684c3b19d077cb763c02f256346f597c9",
+  "referenceFileBytes": 130383,
+  "referenceRootLicense": {
+    "url": "https://raw.githubusercontent.com/stmueller/OpenScales/d555b04a1961181a63f91b534bc1096bcbd1dcdc/LICENSE",
+    "name": "CC BY-NC-SA 4.0",
+    "sha256": "bc573016a61d7c5dfd3d32762c2240586cb1f4e5fc776ecc04319aa8ca2ec37d"
+  },
+  "referenceScaleLicense": "Public Domain",
+  "referenceImplementationLicense": "CC BY 4.0",
+  "definitionEntries": 258,
+  "sectionEntries": 30,
+  "likertEntries": 228,
+  "officialOccurrences": 289,
+  "missingOfficialCount": 62,
+  "referenceOnlyTextCount": 1,
+  "keyMismatchCount": 0,
+  "usage": "Reference inspection only. No OpenScales implementation, scoring expressions, translations, renderer, or tooling copied. This report lists independently extracted official IPIP text and comparison facts.",
+  "subscales": [
+    {
+      "subscale": "NS1",
+      "officialCount": 10,
+      "referenceLikertCount": 7,
+      "missingOfficial": [
+        {
+          "id": "NS1-01",
+          "english": "Prefer variety to routine.",
+          "reverse": false
+        },
+        {
+          "id": "NS1-05",
+          "english": "Seek adventure.",
+          "reverse": false
+        },
+        {
+          "id": "NS1-08",
+          "english": "Don't like the idea of change.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "NS2",
+      "officialCount": 10,
+      "referenceLikertCount": 10,
+      "missingOfficial": [],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "NS3",
+      "officialCount": 4,
+      "referenceLikertCount": 4,
+      "missingOfficial": [],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "NS4",
+      "officialCount": 10,
+      "referenceLikertCount": 10,
+      "missingOfficial": [],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "HA1",
+      "officialCount": 10,
+      "referenceLikertCount": 1,
+      "missingOfficial": [
+        {
+          "id": "HA1-01",
+          "english": "Often feel blue.",
+          "reverse": false
+        },
+        {
+          "id": "HA1-02",
+          "english": "Fear for the worst.",
+          "reverse": false
+        },
+        {
+          "id": "HA1-03",
+          "english": "Dislike myself.",
+          "reverse": false
+        },
+        {
+          "id": "HA1-05",
+          "english": "Get stressed out easily.",
+          "reverse": false
+        },
+        {
+          "id": "HA1-06",
+          "english": "Feel comfortable with myself.",
+          "reverse": true
+        },
+        {
+          "id": "HA1-07",
+          "english": "Am relaxed most of the time.",
+          "reverse": true
+        },
+        {
+          "id": "HA1-08",
+          "english": "Seldom feel blue.",
+          "reverse": true
+        },
+        {
+          "id": "HA1-09",
+          "english": "Am not easily bothered by things.",
+          "reverse": true
+        },
+        {
+          "id": "HA1-10",
+          "english": "Don't worry about things that have already happened.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "HA2",
+      "officialCount": 10,
+      "referenceLikertCount": 10,
+      "missingOfficial": [],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "HA3",
+      "officialCount": 10,
+      "referenceLikertCount": 10,
+      "missingOfficial": [],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "HA4",
+      "officialCount": 9,
+      "referenceLikertCount": 8,
+      "missingOfficial": [
+        {
+          "id": "HA4-09",
+          "english": "Think quickly.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "RD1",
+      "officialCount": 10,
+      "referenceLikertCount": 4,
+      "missingOfficial": [
+        {
+          "id": "RD1-02",
+          "english": "Cry during movies.",
+          "reverse": false
+        },
+        {
+          "id": "RD1-03",
+          "english": "Am deeply moved by others' misfortunes.",
+          "reverse": false
+        },
+        {
+          "id": "RD1-04",
+          "english": "Cry easily.",
+          "reverse": false
+        },
+        {
+          "id": "RD1-06",
+          "english": "Sympathize with others' feelings.",
+          "reverse": false
+        },
+        {
+          "id": "RD1-07",
+          "english": "Suffer from others' sorrows.",
+          "reverse": false
+        },
+        {
+          "id": "RD1-10",
+          "english": "Seldom get emotional.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "RD2",
+      "officialCount": 10,
+      "referenceLikertCount": 2,
+      "missingOfficial": [
+        {
+          "id": "RD2-01",
+          "english": "Make friends easily.",
+          "reverse": false
+        },
+        {
+          "id": "RD2-02",
+          "english": "Warm up quickly to others.",
+          "reverse": false
+        },
+        {
+          "id": "RD2-04",
+          "english": "Am interested in people.",
+          "reverse": false
+        },
+        {
+          "id": "RD2-05",
+          "english": "Love to chat.",
+          "reverse": false
+        },
+        {
+          "id": "RD2-06",
+          "english": "Am hard to get to know.",
+          "reverse": true
+        },
+        {
+          "id": "RD2-08",
+          "english": "Avoid contacts with others.",
+          "reverse": true
+        },
+        {
+          "id": "RD2-09",
+          "english": "Am not really interested in others.",
+          "reverse": true
+        },
+        {
+          "id": "RD2-10",
+          "english": "Keep others at a distance.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "RD3",
+      "officialCount": 10,
+      "referenceLikertCount": 8,
+      "missingOfficial": [
+        {
+          "id": "RD3-02",
+          "english": "Am open about myself to others.",
+          "reverse": false
+        },
+        {
+          "id": "RD3-03",
+          "english": "Disclose my intimate thoughts.",
+          "reverse": false
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "RD4",
+      "officialCount": 10,
+      "referenceLikertCount": 8,
+      "missingOfficial": [
+        {
+          "id": "RD4-06",
+          "english": "Don't care what others think.",
+          "reverse": true
+        },
+        {
+          "id": "RD4-09",
+          "english": "Want to be different from others.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "P1",
+      "officialCount": 10,
+      "referenceLikertCount": 10,
+      "missingOfficial": [],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "P2",
+      "officialCount": 9,
+      "referenceLikertCount": 7,
+      "missingOfficial": [
+        {
+          "id": "P2-05",
+          "english": "Know how to apply my knowledge.",
+          "reverse": false
+        },
+        {
+          "id": "P2-06",
+          "english": "Meet challenges.",
+          "reverse": false
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "P3",
+      "officialCount": 10,
+      "referenceLikertCount": 7,
+      "missingOfficial": [
+        {
+          "id": "P3-03",
+          "english": "Go straight for the goal.",
+          "reverse": false
+        },
+        {
+          "id": "P3-04",
+          "english": "Continue until everything is perfect.",
+          "reverse": false
+        },
+        {
+          "id": "P3-10",
+          "english": "Am not highly motivated to succeed.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "P4",
+      "officialCount": 10,
+      "referenceLikertCount": 7,
+      "missingOfficial": [
+        {
+          "id": "P4-01",
+          "english": "Work hard.",
+          "reverse": false
+        },
+        {
+          "id": "P4-03",
+          "english": "Am always busy.",
+          "reverse": false
+        },
+        {
+          "id": "P4-10",
+          "english": "Put little time and effort into my work.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "S1",
+      "officialCount": 10,
+      "referenceLikertCount": 10,
+      "missingOfficial": [
+        {
+          "id": "S1-03",
+          "english": "Feel that people have a hard time understanding me.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [
+        "Feel that people have a hard time understanding"
+      ],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "S2",
+      "officialCount": 10,
+      "referenceLikertCount": 9,
+      "missingOfficial": [
+        {
+          "id": "S2-06",
+          "english": "Feel that my life lacks direction.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "S3",
+      "officialCount": 10,
+      "referenceLikertCount": 9,
+      "missingOfficial": [
+        {
+          "id": "S3-03",
+          "english": "Am good at many things.",
+          "reverse": false
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "S4",
+      "officialCount": 8,
+      "referenceLikertCount": 8,
+      "missingOfficial": [],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "S5",
+      "officialCount": 10,
+      "referenceLikertCount": 10,
+      "missingOfficial": [],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "C1",
+      "officialCount": 12,
+      "referenceLikertCount": 10,
+      "missingOfficial": [
+        {
+          "id": "C1-03",
+          "english": "Sympathize with the homeless.",
+          "reverse": false
+        },
+        {
+          "id": "C1-10",
+          "english": "Treat people as inferiors.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "C2",
+      "officialCount": 8,
+      "referenceLikertCount": 4,
+      "missingOfficial": [
+        {
+          "id": "C2-01",
+          "english": "Feel others' emotions.",
+          "reverse": false
+        },
+        {
+          "id": "C2-02",
+          "english": "Anticipate the needs of others.",
+          "reverse": false
+        },
+        {
+          "id": "C2-04",
+          "english": "Make others feel good.",
+          "reverse": false
+        },
+        {
+          "id": "C2-05",
+          "english": "Am concerned about others.",
+          "reverse": false
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "C3",
+      "officialCount": 12,
+      "referenceLikertCount": 9,
+      "missingOfficial": [
+        {
+          "id": "C3-01",
+          "english": "Trust what people say.",
+          "reverse": false
+        },
+        {
+          "id": "C3-02",
+          "english": "Trust others.",
+          "reverse": false
+        },
+        {
+          "id": "C3-09",
+          "english": "Distrust people.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "C4",
+      "officialCount": 10,
+      "referenceLikertCount": 10,
+      "missingOfficial": [],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "C5",
+      "officialCount": 10,
+      "referenceLikertCount": 9,
+      "missingOfficial": [
+        {
+          "id": "C5-03",
+          "english": "Like harmony in my life.",
+          "reverse": false
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "ST1",
+      "officialCount": 11,
+      "referenceLikertCount": 4,
+      "missingOfficial": [
+        {
+          "id": "ST1-02",
+          "english": "Like to get lost in thought.",
+          "reverse": false
+        },
+        {
+          "id": "ST1-03",
+          "english": "Have a vivid imagination.",
+          "reverse": false
+        },
+        {
+          "id": "ST1-04",
+          "english": "Do things that others find strange.",
+          "reverse": false
+        },
+        {
+          "id": "ST1-06",
+          "english": "Do unexpected things.",
+          "reverse": false
+        },
+        {
+          "id": "ST1-07",
+          "english": "Enjoy wild flights of fantasy.",
+          "reverse": false
+        },
+        {
+          "id": "ST1-09",
+          "english": "Do things by the book.",
+          "reverse": true
+        },
+        {
+          "id": "ST1-10",
+          "english": "Seldom get lost in thought.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "ST2",
+      "officialCount": 9,
+      "referenceLikertCount": 9,
+      "missingOfficial": [],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "ST4",
+      "officialCount": 9,
+      "referenceLikertCount": 6,
+      "missingOfficial": [
+        {
+          "id": "ST4-01",
+          "english": "Believe in one true religion.",
+          "reverse": false
+        },
+        {
+          "id": "ST4-03",
+          "english": "Tend to vote for conservative political candidates.",
+          "reverse": false
+        },
+        {
+          "id": "ST4-08",
+          "english": "Tend to vote for liberal political candidates.",
+          "reverse": true
+        }
+      ],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    },
+    {
+      "subscale": "ST5",
+      "officialCount": 8,
+      "referenceLikertCount": 8,
+      "missingOfficial": [],
+      "referenceOnlyText": [],
+      "keyMismatches": []
+    }
+  ]
+}

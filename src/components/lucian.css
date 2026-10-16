@@ -1,0 +1,78 @@
+/* Lucian UX/UI Prompt #044 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#044 */
+
+.u044{position:relative;width:350px;height:400px;display:flex;flex-direction:column;gap:8px}
+.u044-it{position:relative;border-radius:20px;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line);transition:background-color .4s var(--ux-ease),box-shadow .5s var(--ux-ease),transform .5s var(--ux-spring)}
+.u044-it.open{box-shadow:0 0 0 1px var(--ux-line-2),0 22px 40px -22px var(--ux-shadow-strong);transform:translateY(-2px)}
+.u044-q{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:0 14px 0 16px;border:0;border-radius:20px;background:none;font-size:14.5px;font-weight:680;letter-spacing:-.02em;color:var(--ux-ink);text-align:left}
+.u044-q:focus-visible{outline:2px solid var(--ux-accent);outline-offset:2px}
+.u044-n{font-size:12px;font-weight:800;color:var(--ux-ink-3);font-variant-numeric:tabular-nums;transition:color .3s}
+.u044-it.open .u044-n{color:var(--ux-accent)}
+.u044-t{flex:1}
+.u044-pm{position:relative;width:30px;height:30px;flex:none;border-radius:50%;background:var(--ux-surface-2);box-shadow:none;transition:background-color .35s var(--ux-ease),box-shadow .35s,transform .45s var(--ux-spring)}
+.u044-q:hover .u044-pm{transform:scale(1.1)}
+.u044-q:active .u044-pm{transform:scale(.9)}
+.u044-pm::before,.u044-pm::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:2px;margin:-1px 0 0 -5.5px;border-radius:2px;background:var(--ux-ink);transition:transform .5s var(--ux-spring),background-color .3s}
+.u044-pm::after{transform:rotate(90deg)}
+.u044-it.open .u044-pm{background:var(--ux-ink);box-shadow:none}
+.u044-it.open .u044-pm::before,.u044-it.open .u044-pm::after{background:var(--ux-page)}
+.u044-it.open .u044-pm::after{transform:rotate(180deg)}
+.u044-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ux-ease)}
+.u044-it.open .u044-body{grid-template-rows:1fr}
+.u044-body>div{overflow:hidden;min-height:0}
+.u044-a{padding:0 18px 16px 42px;opacity:0;transform:translateY(-8px);transition:opacity .25s var(--ux-ease),transform .45s var(--ux-spring)}
+.u044-it.open .u044-a{opacity:1;transform:none;transition-delay:.12s}
+.u044-a p{margin:0;font-size:13.5px;line-height:1.62;color:var(--ux-ink-2)}
+.u044-a a{display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:13px;font-weight:700;color:var(--ux-accent);text-decoration:none}
+.u044-a a:focus-visible{outline:2px solid var(--ux-accent);outline-offset:2px;border-radius:4px}
+.u044-a a i{font-style:normal;transition:transform .3s var(--ux-spring)}
+.u044-a a:hover i{transform:translateX(3px)}
+
+/* Lucian UX/UI Prompt #083 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#083 */
+
+.u083{position:relative;width:350px;height:400px;display:flex;flex-direction:column;padding:20px 20px 18px;border-radius:28px;background:var(--ux-surface);box-shadow:0 0 0 1px var(--ux-line),0 30px 60px -36px var(--ux-shadow-strong);overflow:hidden}
+.u083-h{display:flex;align-items:center;gap:10px}
+.u083-h i{width:36px;height:36px;border-radius:11px;background:var(--ux-ink);position:relative}
+.u083-h i::after{content:"";position:absolute;left:10px;top:11px;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:14px solid var(--ux-page)}
+.u083-h b{display:block;font-size:15.5px;font-weight:850;letter-spacing:-.03em}
+.u083-h small{display:block;font-size:12px;font-weight:650;color:var(--ux-ink-3)}
+.u083-pill{margin-left:auto;height:26px;padding:0 10px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c);font-size:12px;font-weight:800;transition:background-color .4s,color .4s}
+.u083-pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;animation:u083-blink 1.2s ease-in-out infinite}
+.u083.is-done .u083-pill::before{animation:none}
+@keyframes u083-blink{50%{opacity:.3}}
+.u083-trk{position:relative;height:6px;margin:18px 0 6px;border-radius:3px;background:var(--ux-surface-3);overflow:hidden}
+.u083-seg{position:absolute;top:0;bottom:0;border-radius:inherit;background:var(--ux-accent);transition:opacity .4s}
+.u083-seg.a{animation:u083-a 1.6s cubic-bezier(.65,.05,.35,1) infinite}
+.u083-seg.b{animation:u083-b 1.6s cubic-bezier(.25,.6,.4,1) .55s infinite}
+@keyframes u083-a{0%{left:-35%;right:100%}60%{left:100%;right:-90%}100%{left:100%;right:-90%}}
+@keyframes u083-b{0%{left:-200%;right:100%}60%{left:107%;right:-8%}100%{left:107%;right:-8%}}
+.u083-fill{position:absolute;left:0;top:0;bottom:0;width:100%;border-radius:inherit;background:var(--ux-accent);transform-origin:0 50%;transform:scaleX(var(--p,0));opacity:0;transition:transform .5s var(--ux-ease),opacity .3s,background-color .4s}
+.u083.is-det .u083-seg{opacity:0}
+.u083.is-det .u083-fill{opacity:1}
+.u083.is-done .u083-fill{background:var(--ux-mint)}
+.u083-meta{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--ux-ink-3);font-variant-numeric:tabular-nums}
+.u083-log{flex:1;margin:12px 0 0;padding:12px;border-radius:16px;background:var(--ux-surface-2);list-style:none;overflow:hidden;display:flex;flex-direction:column;gap:7px;font-size:12.5px;font-weight:600;line-height:1.4}
+.u083-log li{display:flex;align-items:center;gap:8px;color:var(--ux-ink-2);animation:u083-in .4s var(--ux-ease)}
+@keyframes u083-in{from{opacity:0;transform:translateY(8px)}}
+.u083-log time{color:var(--ux-ink-3);font:600 11.5px ui-monospace,SFMono-Regular,Menlo,monospace}
+.u083-st{width:14px;height:14px;flex:none;position:relative}
+.u083-st::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--ux-accent);border-right-color:transparent;animation:u083-spin .7s linear infinite}
+.u083-log li.ok .u083-st::before{border:0;animation:none;background:var(--ux-mint);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3 7.4l2.6 2.6L11 4.6' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3 7.4l2.6 2.6L11 4.6' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+.u083-log li.ok{color:var(--ux-ink-3)}
+@keyframes u083-spin{to{transform:rotate(360deg)}}
+.u083-re{margin-top:12px;height:44px;border:0;border-radius:14px;background:var(--ux-ink);color:var(--ux-page);font-size:14px;font-weight:750;transition:opacity .3s,transform .3s var(--ux-spring)}
+.u083-re:active{transform:scale(.97)}
+.u083-re[aria-disabled="true"]{opacity:.35}
+.u083-re:focus-visible{outline:2px solid var(--ux-accent);outline-offset:2px}
+
+/* Product adaptations: responsive FAQ height/width, readable Korean text;
+progress uses the original determinate track only, without the deployment demo. */
+.u044{width:100%;height:auto;max-width:100%}
+.u044-q{font-size:15px;min-height:66px;line-height:1.5;padding-block:12px}
+.u044-a{padding-bottom:20px}
+.u044-a p{font-size:14px;line-height:1.8}
+.u083{width:100%;height:auto;padding:0;background:none;box-shadow:none;border-radius:0;overflow:visible}
+.u083-meta{font-size:13px;color:var(--muted)}
+.u083-trk{height:6px;margin:12px 0 0}
+.ux{box-sizing:border-box;font-family:inherit}
+.ux *,.ux *::before,.ux *::after{box-sizing:border-box}
+@media(prefers-reduced-motion:reduce){.ux *,.ux *::before,.ux *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
