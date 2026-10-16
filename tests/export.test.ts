@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { buildSummaryText, downloadPdf, downloadPng, renderShareImage, type ExportSelection } from '../src/lib/export';
+import { domains, subscales } from '../src/data/scales';
 import type { Insight, ScoreResult } from '../src/types';
 
 const result: ScoreResult = {
@@ -30,6 +31,22 @@ const insights: Insight[] = [
   { code: 'unknown', title: '알 수 없는 단서', text: 'UNKNOWN_PRIVATE_INSIGHT', mean: 5, direction: 'high' },
 ];
 const selected: ExportSelection = { includeSummary: true, domains: ['NS'], includeSubscales: false };
+
+function canvasRecorder() {
+  const painted: Array<{ text: string; x: number; y: number; size: number }> = [];
+  const ctx = {
+    font: '', fillStyle: '', textBaseline: 'top', textAlign: 'left',
+    measureText(text: string) { return { width: Array.from(text).length * (parseFloat(this.font.split(' ')[1]) || 28) * 0.9 }; },
+    fillText(text: string, x: number, y: number) { painted.push({ text, x, y, size: parseFloat(this.font.split(' ')[1]) || 28 }); },
+    fillRect() {}, beginPath() {}, ellipse() {}, fill() {}, roundRect() {}, arc() {},
+  };
+  const canvas = { width: 0, height: 0, getContext: () => ctx };
+  vi.stubGlobal('document', {
+    fonts: { load: () => Promise.resolve([{}]) },
+    createElement: () => canvas,
+  });
+  return { painted, canvas };
+}
 
 afterEach(() => vi.unstubAllGlobals());
 
@@ -140,5 +157,59 @@ describe('explicitly selected local export payload', () => {
     await expect(downloadPdf(missing, insights, { ...selected, includeSubscales: true })).rejects.toThrow(/NS2.*점수/);
     // Missing detailed data must not block exports when it was not requested.
     await expect(downloadPdf(missing, insights, selected)).rejects.toThrow(/글꼴/);
+  });
+});
+
+describe('compact sharing canvas', () => {
+  it('keeps all seven selected domain averages within a fixed 4:5 card', async () => {
+    const { painted } = canvasRecorder();
+    const complete: ScoreResult = {
+      answered: 289,
+      domains: domains.map(domain => ({ code: domain.code, mean: 3, subscales: [] })),
+      subscales: [],
+    };
+    const canvas = await renderShareImage(complete, [], { ...selected, domains: domains.map(domain => domain.code) });
+    expect([canvas.width, canvas.height]).toEqual([1080, 1350]);
+    const text = painted.map(line => line.text).join('');
+    expect(text).toContain('내 마음의 결');
+    for (const name of ['자극추구', '위험회피', '사회적 민감성', '인내력', '자율성', '연대감', '자기초월']) expect(text).toContain(name);
+    expect(painted.filter(line => line.text === '3.00')).toHaveLength(7);
+    expect(painted.every(line => line.y >= 0 && line.y + line.size < 1350)).toBe(true);
+  });
+
+  it('shows only one salient selected subscale using its actual response direction and evidence', async () => {
+    const { painted } = canvasRecorder();
+    await renderShareImage(result, insights, selected);
+    const text = painted.map(line => line.text).join('');
+    expect(text).toContain('NS2 · 평균 1.10 / 5');
+    expect(text.replace(/\s/g, '')).toContain('행동 전에 생각하고 가능성과 세부사항을 검토하는 쪽에 가까운 응답입니다.'.replace(/\s/g, ''));
+    expect(text).not.toMatch(/NS1 · 평균|NS4 · 평균|ST4|ST5|HA_PRIVATE|POLITICAL_PRIVATE|GENDER_PRIVATE/);
+  });
+
+  it('keeps every metadata caution and honest middle description inside the seven-domain card', async () => {
+    const complete: ScoreResult = {
+      answered: 289,
+      domains: domains.map(domain => ({ code: domain.code, mean: 3, subscales: [] })),
+      subscales: [],
+    };
+    for (const scale of subscales) {
+      const { painted } = canvasRecorder();
+      await renderShareImage(complete, [{ code: scale.code, title: scale.name, text: '', mean: 3, direction: 'middle' }], { ...selected, domains: domains.map(domain => domain.code) });
+      const text = painted.map(line => line.text).join('');
+      expect(text, scale.code).toContain(`${scale.code} · 평균 3.00 / 5`);
+      expect(text.replace(/\s/g, ''), scale.code).toContain('개별문항의응답은다를수있습니다.');
+      if (scale.caution) expect(text.replace(/\s/g, ''), scale.code).toContain(scale.caution.replace(/\s/g, ''));
+      expect(painted.every(line => line.y >= 0 && line.y + line.size < 1350), scale.code).toBe(true);
+    }
+  });
+
+  it('omits the interpretation when summary consent is off while keeping disclosure and site', async () => {
+    const { painted } = canvasRecorder();
+    await renderShareImage(result, insights, { ...selected, includeSummary: false });
+    const text = painted.map(line => line.text).join('');
+    expect(text).not.toMatch(/NS[1-4] · 평균|숙고 없는 행동|POLITICAL_PRIVATE/);
+    expect(text).toContain('비공식');
+    expect(text).toContain('규준');
+    expect(text).toContain('https://lucianlabs.dev/tci/');
   });
 });

@@ -4,20 +4,20 @@ import { Accordion } from '../components/Accordion';
 import { domains } from '../data/scales';
 import { DISCLAIMER, REPO_URL } from '../config';
 
-export function Home({ answered, complete, onStart, onResume }: { answered: number; complete: boolean; onStart: () => void; onResume: () => void }) {
+export function Home({ answered, complete, onStart, onResume, onPreview }: { answered: number; complete: boolean; onStart: () => void; onResume: () => void; onPreview: () => void }) {
   return <>
     <section className="hero page-width">
       <div className="hero-copy">
-        <span className="eyebrow"><span className="tiny-leaf" /> 나를 알아가는 시간</span>
+        <span className="eyebrow"><span className="tiny-leaf" /> 나를 꺼내보는 289개의 질문</span>
         <p className="hero-question">나의 타고난 기질과 성격,<br className="mobile-break" /> 얼마나 알고 계신가요?</p>
         <h1>무료 TCI<br />기질검사<span className="title-dot">.</span></h1>
-        <p className="hero-description">새로움에 끌리는 마음부터, 관계를 맺는 방식까지.<br />289개의 질문으로 내 마음의 결을 살펴보세요.</p>
+        <p className="hero-description"><strong>아는 듯 몰랐던, 내 마음의 결.</strong><span>새로움에 끌리는 마음부터 관계를 맺는 방식까지.<br />답변이 모이면, 나를 이해하는 한 장이 됩니다.</span></p>
         <div className="hero-actions"><button className="button primary large" onClick={answered ? onResume : onStart}>{answered ? (complete ? '내 결과 다시 보기' : '이어서 검사하기') : '검사 시작하기'}<ArrowRight size={20} /></button>
-          {answered > 0 ? <span className="small muted">이 브라우저에 {answered}개 답변이 있어요.</span> : <span className="small muted">나에게 집중할 준비가 됐다면</span>}</div>
+          {answered > 0 ? <span className="small muted">이 브라우저에 {answered}개 답변이 있어요.</span> : <button className="hero-preview-link" onClick={onPreview}>결과 카드 미리보기 <ArrowUpRight size={14}/></button>}</div>
         <div className="free-promise"><Check size={16} /><span>100% 무료. 회원가입 없이 검사하고 결과까지 확인하세요.</span></div>
         <p className="hero-disclosure">IPIP 공개 문항 기반의 비공식 검사입니다.<br />정식 TCI-RS 검사·임상 진단과 다릅니다. <a href="#about">자세히 알아보기 ↗</a></p>
       </div>
-      <div className="hero-art"><div className="art-label"><span>일곱 가지 시선</span><span>하나뿐인 나</span></div><Flower /><div className="art-caption">서로 다른 결이 모여, 나를 이룹니다.</div></div>
+      <div className="hero-art"><div className="note-back" aria-hidden="true"/><div className="hero-note"><div className="art-label"><span>나의 마음 기록</span><span>일곱 가지 시선</span></div><Flower /><div className="art-caption">나는 어떤 결을 가진 사람일까?</div><div className="hero-topics"><span>새로움 앞의 나</span><span>관계 속의 나</span><span>꾸준한 나</span></div><button className="note-preview" onClick={onPreview}>내 응답을 담을 한 장 <ArrowUpRight size={15}/></button></div></div>
     </section>
     <section className="trust-strip page-width" aria-label="검사 안내 요약">
       <div><BookOpen size={22} /><p><strong>전체 289문항</strong><span>30가지 세부 경향을 살펴봐요</span></p></div>

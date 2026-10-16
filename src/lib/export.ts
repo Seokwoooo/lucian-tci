@@ -133,72 +133,113 @@ function fontText(content: ExportContent): string {
   ].join(' ');
 }
 
+function shareSummary(content: ExportContent): { title: string; evidence: string; text: string } | undefined {
+  const insight = content.insights[0];
+  if (!insight) return;
+  const scale = subscales.find(value => value.code === insight.code)!;
+  const direction = insight.mean <= 2.5 ? 'low' : insight.mean >= 3.5 ? 'high' : 'middle';
+  const description = direction === 'middle'
+    ? '응답 평균은 기술적 중간 구간에 있습니다. 중간 선택이나 서로 다른 방향의 응답이 섞여 같은 평균이 나올 수 있으며, 개별 문항의 응답은 다를 수 있습니다.'
+    : scale[direction];
+  return {
+    title: scale.name,
+    evidence: `${scale.code} · 평균 ${insight.mean.toFixed(2)} / 5`,
+    text: `${description}${scale.caution ? ` ${scale.caution}` : ''}`,
+  };
+}
+
+function fittedShareLines(ctx: CanvasRenderingContext2D, text: string, width: number, height: number, largest: number, smallest: number, weight = 400) {
+  for (let size = largest; size >= smallest; size--) {
+    font(ctx, size, weight);
+    const lines = wrap(ctx, text, width);
+    const lineHeight = Math.ceil(size * 1.5);
+    if (lines.length * lineHeight <= height) return { lines, size, lineHeight };
+  }
+  throw new Error('선택한 설명을 공유 카드에 담을 수 없습니다. 텍스트 요약이나 PDF로 저장해 주세요.');
+}
+
 export async function renderShareImage(
   result: ScoreResult, insights: Insight[], selection: ExportSelection, siteUrl = DEFAULT_SITE_URL,
 ): Promise<HTMLCanvasElement> {
   const content = contentFor(result, insights, selection, siteUrl);
-  await loadFonts(fontText(content));
+  const summary = shareSummary(content);
+  const subtitle = '나는 이런 쪽에 가까웠어. 너는 어때?';
+  const disclosure = '비공식 IPIP 기반 · 응답 평균 1–5\n규준·백분위·임상 진단 결과가 아닙니다.';
+  await loadFonts(`${fontText(content)} 내 마음의 결 ${subtitle} ${disclosure} 선택한 영역의 응답 평균 응답에서 발견한 단서 ${summary ? `${summary.title} ${summary.evidence} ${summary.text}` : ''}`);
   const width = 1080;
-  const margin = 72;
+  const height = 1350;
+  const margin = 64;
   const inner = width - margin * 2;
-  const { canvas, ctx } = canvasContext(width, 1440);
-  font(ctx, 29);
-  const cards = content.insights.map(insight => {
-    font(ctx, 29, 600);
-    const titleLines = wrap(ctx, insight.title, inner - 56);
-    font(ctx, 27);
-    const textLines = wrap(ctx, insight.text, inner - 56);
-    return { insight, height: 54 + titleLines.length * 44 + textLines.length * 45 };
-  });
-  font(ctx, 24);
-  const noteHeight = wrap(ctx, SCALE_NOTE, inner).length * 39;
-  font(ctx, 22);
-  const footerHeight = wrap(ctx, DISCLOSURE, inner).length * 36 + wrap(ctx, content.siteUrl, inner).length * 36 + 110;
-  canvas.height = Math.ceil(Math.max(1440, 360 + content.domains.length * 110 + noteHeight + 46 + (cards.length ? 86 : 0) + cards.reduce((sum, card) => sum + card.height + 22, 0) + footerHeight));
+  const { canvas, ctx } = canvasContext(width, height);
+  const summaryY = 306;
+  const chartBottom = 1120;
+  const summaryLimit = chartBottom - summaryY - 36 - 64 - content.domains.length * 48;
+  const summaryBody = summary ? fittedShareLines(ctx, summary.text, inner - 56, summaryLimit - 154, 28, 22) : undefined;
+  const summaryHeight = summaryBody ? 154 + summaryBody.lines.length * summaryBody.lineHeight : 0;
+  const chartTop = summary ? summaryY + summaryHeight + 36 : 400;
+  const rowHeight = Math.min(96, (chartBottom - chartTop - 64) / content.domains.length);
+  const link = fittedShareLines(ctx, content.siteUrl, inner, 68, 24, 16, 600);
   ctx.fillStyle = PAPER;
-  ctx.fillRect(0, 0, width, canvas.height);
-  // The leaf motif stays outside all text and chart bounds.
-  ctx.fillStyle = '#C4CFAC';
-  ctx.beginPath(); ctx.ellipse(886, 152, 53, 100, 0.6, 0, Math.PI * 2); ctx.fill();
-  ctx.fillStyle = '#DBBBA1';
-  ctx.beginPath(); ctx.ellipse(964, 144, 34, 67, -0.6, 0, Math.PI * 2); ctx.fill();
-  paragraph(ctx, 'LUCIANLABS  /  IPIP', margin, 66, 710, 23, 600, MUTED);
-  paragraph(ctx, '나의 응답 단서', margin, 122, 740, 60, 600);
-  paragraph(ctx, '기질과 성격 돌아보기', margin, 218, 740, 28, 400, MUTED);
-  let y = 322;
+  ctx.fillRect(0, 0, width, height);
+  // Seven unlabelled leaves are a brand motif, never a representation of scores.
+  const leaves = [
+    [876, 145, 47, 80, -0.8, '#B87553'], [955, 149, 42, 73, 0.5, '#8D9170'],
+    [825, 210, 36, 64, -0.9, '#C59A73'], [909, 220, 42, 72, 0.7, '#73876B'],
+    [983, 224, 27, 49, 0.4, '#AF995E'], [934, 77, 23, 40, 0.5, '#8C927E'],
+    [1004, 104, 22, 37, 0.4, '#9A8691'],
+  ] as const;
+  ctx.globalAlpha = 0.72;
+  for (const [x, y, rx, ry, rotation, color] of leaves) {
+    ctx.fillStyle = color;
+    ctx.beginPath(); ctx.ellipse(x, y, rx, ry, rotation, 0, Math.PI * 2); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  paragraph(ctx, 'LUCIANLABS  /  IPIP', margin, 56, 680, 21, 600, MUTED);
+  paragraph(ctx, '내 마음의 결', margin, 111, 720, 92, 600);
+  paragraph(ctx, subtitle, margin, 239, 740, 26, 400, MUTED);
+
+  if (summary && summaryBody) {
+    ctx.fillStyle = '#FFFDF7';
+    ctx.beginPath(); ctx.roundRect(margin, summaryY, inner, summaryHeight, 30); ctx.fill();
+    paragraph(ctx, `응답에서 발견한 단서  /  ${summary.evidence}`, margin + 28, summaryY + 24, inner - 56, 20, 400, MUTED);
+    paragraph(ctx, summary.title, margin + 28, summaryY + 66, inner - 56, 38, 600, INK, 1.3);
+    font(ctx, summaryBody.size);
+    let bodyY = summaryY + 126;
+    for (const line of summaryBody.lines) {
+      ctx.fillText(line, margin + 28, bodyY);
+      bodyY += summaryBody.lineHeight;
+    }
+  }
+
+  paragraph(ctx, '선택한 영역의 응답 평균', margin, chartTop, 630, 24, 600);
+  const barX = 362;
+  const barWidth = 498;
+  font(ctx, 17, 400, MUTED);
+  ctx.fillText('1', barX, chartTop + 9);
+  ctx.textAlign = 'right'; ctx.fillText('5', barX + barWidth, chartTop + 9); ctx.textAlign = 'left';
+  let y = chartTop + 64;
   for (const { metadata, score } of content.domains) {
-    font(ctx, 29, 600);
-    ctx.fillText(`${metadata.name} · ${metadata.code}`, margin, y);
+    font(ctx, 25, 600);
+    ctx.fillText(metadata.name, margin, y);
+    font(ctx, 17, 400, MUTED);
+    ctx.fillText(metadata.code, 289, y + 6);
+    const barY = y + 12;
+    ctx.fillStyle = RULE;
+    ctx.beginPath(); ctx.roundRect(barX, barY, barWidth, 10, 5); ctx.fill();
+    const end = barX + barWidth * (score.mean - 1) / 4;
+    ctx.fillStyle = metadata.color;
+    if (end > barX) { ctx.beginPath(); ctx.roundRect(barX, barY, end - barX, 10, 5); ctx.fill(); }
+    ctx.beginPath(); ctx.arc(end, barY + 5, 8, 0, Math.PI * 2); ctx.fill();
+    font(ctx, 28, 600);
     ctx.textAlign = 'right';
     ctx.fillText(score.mean.toFixed(2), width - margin, y);
     ctx.textAlign = 'left';
-    y += 50;
-    ctx.fillStyle = RULE;
-    ctx.fillRect(margin, y, inner, 13);
-    ctx.fillStyle = metadata.color;
-    ctx.fillRect(margin, y, inner * (score.mean - 1) / 4, 13);
-    ctx.beginPath(); ctx.arc(margin + inner * (score.mean - 1) / 4, y + 6.5, 11, 0, Math.PI * 2); ctx.fill();
-    font(ctx, 18, 400, MUTED);
-    ctx.fillText('1', margin, y + 23);
-    ctx.textAlign = 'right'; ctx.fillText('5', width - margin, y + 23); ctx.textAlign = 'left';
-    y += 60;
+    y += rowHeight;
   }
-  y += 12;
-  y = paragraph(ctx, SCALE_NOTE, margin, y, inner, 24, 400, MUTED) + 36;
-  if (cards.length) {
-    y = paragraph(ctx, '선택한 영역의 응답 요약', margin, y, inner, 30, 600) + 28;
-    for (const { insight, height } of cards) {
-      ctx.fillStyle = '#FFFDF7';
-      ctx.beginPath(); ctx.roundRect(margin, y, inner, height, 22); ctx.fill();
-      let cardY = paragraph(ctx, insight.title, margin + 28, y + 24, inner - 56, 29, 600, INK, 44 / 29) + 10;
-      cardY = paragraph(ctx, insight.text, margin + 28, cardY, inner - 56, 27, 400, INK, 45 / 27);
-      y = Math.max(y + height, cardY + 20) + 22;
-    }
-  }
-  y += 24;
-  ctx.fillStyle = RULE; ctx.fillRect(margin, y, inner, 1);
-  y = paragraph(ctx, DISCLOSURE, margin, y + 27, inner, 22, 400, MUTED, 36 / 22) + 20;
-  paragraph(ctx, content.siteUrl, margin, y, inner, 22, 600, INK, 36 / 22);
+  ctx.fillStyle = RULE; ctx.fillRect(margin, 1160, inner, 1);
+  paragraph(ctx, disclosure, margin, 1183, inner, 21, 400, MUTED, 1.5);
+  font(ctx, link.size, 600);
+  for (const [index, line] of link.lines.entries()) ctx.fillText(line, margin, 1260 + index * link.lineHeight);
   return canvas;
 }
 

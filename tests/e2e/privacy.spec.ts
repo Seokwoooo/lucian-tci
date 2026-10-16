@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import items from '../../src/data/items.json' with { type: 'json' };
+import AxeBuilder from '@axe-core/playwright';
 
 const key = 'lucian-tci:session:v1';
 
@@ -12,10 +13,12 @@ test('changing sharing selection clears denied-clipboard fallback and X includes
   await page.goto('./#result');
   await page.getByRole('button',{name:'저장·공유하기',exact:true}).click();
   await page.getByRole('checkbox',{name:'자기초월',exact:true}).check();
+  await expect(page.locator('.live-card-image')).toBeVisible();
   await page.getByRole('button',{name:'결과 요약 복사',exact:true}).click();
   await expect(page.getByRole('textbox',{name:'직접 복사할 내용'})).toHaveValue(/자기초월/);
   await page.getByRole('checkbox',{name:'자기초월',exact:true}).uncheck();
   await expect(page.getByRole('textbox',{name:'직접 복사할 내용'})).toHaveCount(0);
+  await expect(page.locator('.live-card-image')).toHaveCount(0);
   await page.getByRole('checkbox',{name:'자극추구',exact:true}).check();
   await page.getByRole('button',{name:'𝕏 선택한 결과 공유'}).click();
   const url = new URL(await page.evaluate(()=>(window as unknown as {capturedShare:string}).capturedShare));
@@ -26,6 +29,21 @@ test('changing sharing selection clears denied-clipboard fallback and X includes
   expect(url.searchParams.get('text')).not.toContain(items[0].korean);
   await page.getByRole('button',{name:'일반 링크 복사'}).click();
   await expect(page.getByRole('textbox',{name:'직접 복사할 내용'})).toHaveValue('https://lucianlabs.dev/tci/');
+});
+
+test('public example is labelled, keyboard accessible, and does not create personal answers', async ({page})=>{
+  await page.goto('./');
+  await page.getByRole('button',{name:'결과 카드 미리보기'}).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page.getByText('미리보기 예시입니다.',{exact:false})).toBeVisible();
+  await expect(page.locator('.example-image')).toBeVisible();
+  await expect.poll(()=>page.locator('.example-image').evaluate((image:HTMLImageElement)=>[image.naturalWidth,image.naturalHeight])).toEqual([1080,1350]);
+  expect(await page.evaluate(k=>localStorage.getItem(k),key)).toBeNull();
+  const accessibility=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa']).analyze();
+  expect(accessibility.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))).toEqual([]);
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(page.getByRole('button',{name:'결과 카드 미리보기'})).toBeFocused();
 });
 
 test('answers and deletion synchronize across open tabs', async ({ page, context }) => {

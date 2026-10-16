@@ -13,11 +13,11 @@
 - 모든 서브에이전트는 gpt-6.1-sol / xhigh, 역할 설정과 런타임 근거 확인.
 
 ## Tasks
-- [ ] 1. 데이터: provenance HTML → scripts/extract-ipip.mjs → src/data/items.json (Item[]), expected-counts.json. 독립 한국어 번역, 문항별 검수 메모. validate-data.mjs로 count/key/text/version/duplicate 검증.
-- [ ] 2. 엔진: src/lib/scoring.ts의 scoreAnswers(answers, items?) → ScoreResult. 누락/범위/알 수 없는 ID 거부. src/lib/interpretation.ts → Insight[]. src/data/scales.ts → domains, subscales. 30개 척도와 방향 테스트.
-- [ ] 3. UX: 랜딩/안내/검사/검토/결과/정보. 저장 버전 검증, 손상·실패 처리, 공유 동의 및 export 기능. 같은 origin 자산만 로드.
-- [ ] 4. QA: 실제 289문항 클릭, 수정/새로고침/완료/공유/삭제, desktop/mobile, axe, PNG/PDF 실물 확인, 독립 코드·번역 검토.
-- [ ] 5. 출처/채점/한계/개인정보/배포/라이선스 문서, MIT 공개 저장소 및 안전한 독립 배포.
+- [x] 1. 데이터: provenance HTML → scripts/extract-ipip.mjs → src/data/items.json (Item[]), expected-counts.json. 독립 한국어 번역, 문항별 검수 메모. validate-data.mjs로 count/key/text/version/duplicate 검증.
+- [x] 2. 엔진: src/lib/scoring.ts의 scoreAnswers(answers, items?) → ScoreResult. 누락/범위/알 수 없는 ID 거부. src/lib/interpretation.ts → Insight[]. src/data/scales.ts → domains, subscales. 30개 척도와 방향 테스트.
+- [x] 3. UX: 랜딩/안내/검사/검토/결과/정보. 저장 버전 검증, 손상·실패 처리, 공유 동의 및 export 기능. 같은 origin 자산만 로드.
+- [x] 4. QA: 실제 289문항 클릭, 수정/새로고침/완료/공유/삭제, desktop/mobile, axe, PNG/PDF 실물 확인, 독립 코드·번역 검토.
+- [x] 5. 출처/채점/한계/개인정보/배포/라이선스 문서, MIT 공개 저장소 및 안전한 독립 배포.
 
 ## Interfaces and review focus
 데이터 JSON은 src/types.ts Item에 맞춘다. 엔진은 raw 입력을 검증하며 순서와 무관하다. UI 저장키는 버전과 함께 검증한다.

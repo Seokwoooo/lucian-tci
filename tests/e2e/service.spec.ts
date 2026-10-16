@@ -15,9 +15,10 @@ async function noOverflow(page:Page){expect(await page.evaluate(()=>document.doc
 test('full 289-item journey, reload, reopen, edit, results, PNG/PDF, share and delete',async({page:initial,context},info)=>{
   let page=initial;
   const errors:string[]=[];const external:string[]=[];
+  const allowedOrigin = new URL(info.project.use.baseURL!).origin;
   context.on('page',p=>p.on('pageerror',e=>errors.push(e.message)));
   page.on('pageerror',e=>errors.push(e.message));
-  context.on('request',request=>{if(!request.url().startsWith('http://127.0.0.1:4173')&&!request.url().startsWith('data:')&&!request.url().startsWith('blob:'))external.push(request.url());});
+  context.on('request',request=>{if(!request.url().startsWith(`${allowedOrigin}/`)&&!request.url().startsWith('data:')&&!request.url().startsWith('blob:'))external.push(request.url());});
   await mkdir('output/playwright',{recursive:true});
   await page.goto('./');await page.evaluate(()=>document.fonts.ready);
   await expect(page.getByRole('heading',{name:'무료 TCI 기질검사.',exact:true})).toBeVisible();
@@ -65,7 +66,7 @@ test('full 289-item journey, reload, reopen, edit, results, PNG/PDF, share and d
   const preview=await page.locator('.share-preview pre').innerText();
   expect(preview).toContain('자극추구');expect(preview).not.toContain('자기초월');expect(preview).not.toContain('사회적 민감성');expect(preview).not.toContain(items[0].korean);
   const pngPromise=page.waitForEvent('download');await page.getByRole('button',{name:'PNG 저장',exact:true}).click();const png=await pngPromise;await png.saveAs(`output/playwright/${info.project.name}-export.png`);
-  const bytes=await readFile(`output/playwright/${info.project.name}-export.png`);expect(bytes.subarray(1,4).toString()).toBe('PNG');expect(bytes.readUInt32BE(16)).toBe(1080);expect(bytes.length).toBeGreaterThan(20000);
+  const bytes=await readFile(`output/playwright/${info.project.name}-export.png`);expect(bytes.subarray(1,4).toString()).toBe('PNG');expect(bytes.readUInt32BE(16)).toBe(1080);expect(bytes.readUInt32BE(20)).toBe(1350);expect(bytes.length).toBeGreaterThan(20000);
   for(const domain of domains)await page.getByRole('checkbox',{name:domain.name,exact:true}).check();
   await page.getByRole('checkbox',{name:'PDF에 선택한 영역의 하위척도 상세도 포함'}).check();
   const pdfPromise=page.waitForEvent('download');await page.getByRole('button',{name:'PDF 다운로드',exact:true}).click();const pdf=await pdfPromise;await pdf.saveAs(`output/playwright/${info.project.name}-export.pdf`);

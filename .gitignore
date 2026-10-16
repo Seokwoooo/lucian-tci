@@ -3,6 +3,7 @@ dist/
 output/
 test-results/
 playwright-report/
+.playwright-cli/
 .vercel/
 .agents/
 .superpowers/

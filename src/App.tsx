@@ -12,6 +12,7 @@ import { scoreAnswers } from './lib/scoring';
 import { REPO_URL } from './config';
 const Results = lazy(()=>import('./pages/Results'));
 const ShareDialog = lazy(()=>import('./components/ShareDialog'));
+const ExampleDialog = lazy(()=>import('./components/ExampleDialog'));
 const items = itemData as Item[];
 type Route = 'home'|'guide'|'test'|'review'|'result'|'about'|'privacy'|'scoring';
 function getRoute():Route { const hash = location.hash.slice(1); return ['home','guide','test','review','result','about','privacy','scoring'].includes(hash) ? hash as Route : 'home'; }
@@ -19,7 +20,7 @@ function go(route:Route){location.hash=route;}
 
 function DeleteDialog({onClose,onDelete}:{onClose:()=>void;onDelete:()=>void}) {
   const ref=useRef<HTMLDialogElement>(null);
-  useEffect(()=>{ref.current?.showModal();return()=>ref.current?.close();},[]);
+  useEffect(()=>{const node=ref.current!;const opener=document.activeElement as HTMLElement|null;node.showModal();return()=>{node.close();if(opener?.isConnected)opener.focus({preventScroll:true});};},[]);
   return <dialog ref={ref} className="delete-dialog" aria-labelledby="delete-title" onCancel={e=>{e.preventDefault();onClose();}}><div className="dialog-heading"><h2 id="delete-title">저장된 답변을 삭제할까요?</h2><button className="icon-button" onClick={onClose} aria-label="삭제 창 닫기"><X/></button></div><p>이 브라우저의 답변, 결과, 진행 상황이 모두 삭제됩니다. 삭제한 답변은 복구할 수 없어요. 이미 저장한 PNG·PDF와 외부에 공유한 내용은 남습니다.</p><div className="dialog-actions"><button className="button secondary" autoFocus onClick={onClose}>취소</button><button className="button danger" onClick={onDelete}>모든 답변 삭제</button></div></dialog>;
 }
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
   const [route,setRoute] = useState(getRoute);
   const [deleting,setDeleting] = useState(false);
   const [sharing,setSharing] = useState(false);
+  const [previewing,setPreviewing] = useState(false);
   const answered = Object.keys(session.answers).length;
   const currentRoute = route==='result' && !session.complete ? 'home' : route;
   useEffect(()=>{const listener=()=>setRoute(getRoute());window.addEventListener('hashchange',listener);return()=>window.removeEventListener('hashchange',listener);},[]);
@@ -46,7 +48,7 @@ export default function App() {
     <header className="site-header"><div className="header-inner"><a className="brand" href="#home" aria-label="무료 TCI 기질검사 처음으로"><span className="brand-symbol"><Sprout size={23}/></span><span>lucian<span className="brand-light"> labs</span><small>무료 TCI 기질검사</small></span></a><nav aria-label="주요 메뉴"><a href="#about" className="header-about">검사 안내</a>{(answered>0||issue)&&<button className="header-delete" onClick={()=>setDeleting(true)}><Trash2 size={15}/><span>저장된 답변 삭제</span></button>}<a href={REPO_URL} target="_blank" rel="noreferrer" className="open-source-link">오픈소스 <ArrowUpRight size={14}/></a></nav></div></header>
     {issue&&<div className="issue-banner page-width" role="alert">{issue}</div>}{notice&&<div className="notice-banner page-width" role="status">{notice}</div>}
     <main id="main-content" tabIndex={-1}>
-      {currentRoute==='home'&&<Home answered={answered} complete={session.complete} onStart={()=>go('guide')} onResume={()=>go(session.complete?'result':'test')}/>}
+      {currentRoute==='home'&&<Home answered={answered} complete={session.complete} onStart={()=>go('guide')} onResume={()=>go(session.complete?'result':'test')} onPreview={()=>setPreviewing(true)}/>}
       {currentRoute==='guide'&&<Guide onStart={()=>{commit(session);go('test');}}/>}
       {currentRoute==='test'&&<Questionnaire items={items} session={session} saveIssue={issue} onAnswer={answer} onMove={move} onReview={()=>go('review')}/>}
       {currentRoute==='review'&&<Review items={items} answers={session.answers} onEdit={move} onFinish={finish}/>}
@@ -56,5 +58,6 @@ export default function App() {
     <footer className="site-footer page-width"><div><a href="https://lucianlabs.dev" target="_blank" rel="noreferrer" className="footer-brand">Lucian Labs <ArrowUpRight size={14}/></a><p>나를 이해하는 도구를, 누구나 무료로.</p></div><nav aria-label="하단 메뉴"><a href="#about">출처와 한계</a><a href="#scoring">채점 방법</a><a href="#privacy">개인정보 처리 안내</a><a href="https://x.com/lucian__03" target="_blank" rel="noreferrer">만든 사람 𝕏</a></nav><p className="footer-disclosure">IPIP 기반 비공식 자기이해 테스트 · 정식 TCI-RS 검사 아님<br/>© 2026 Lucian Labs · 코드 MIT · IPIP 문항 Public Domain</p></footer>
     {deleting&&<DeleteDialog onClose={()=>setDeleting(false)} onDelete={remove}/>}
     {sharing&&result&&<Suspense fallback={<div role="status" className="notice-banner">공유 도구를 준비하고 있어요…</div>}><ShareDialog result={result} onClose={()=>setSharing(false)}/></Suspense>}
+    {previewing&&<Suspense fallback={<div role="status" className="notice-banner">예시 카드를 준비하고 있어요…</div>}><ExampleDialog onClose={()=>setPreviewing(false)} onStart={()=>{setPreviewing(false);go(answered?(session.complete?'result':'test'):'guide');}}/></Suspense>}
   </>;
 }
