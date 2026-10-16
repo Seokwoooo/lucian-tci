@@ -89,3 +89,11 @@ CSP는 script·font·connect를 같은 origin으로 제한하고 이미지의 `d
 앱 오류는 독립 `lucian-tci` 프로젝트의 이전 READY deployment로 되돌립니다. 서비스를 연결 해제해야 할 때는 위 두 `/tci` rule만 제거하고 변경 내용을 비교한 뒤 승격합니다. 기존 `/icons/` rule, 기존 deployment, DNS를 일괄 교체하지 않습니다.
 
 카카오 전용 SDK 공유는 앱 키·허용 도메인이 없어 활성화하지 않았습니다. 현재 배포의 필수 환경변수는 없습니다. 국내 명칭·상표 검토, 번역 전문가 감수, 한국 표본 타당화와 실제 사람 대상 사용성·소요시간 검증은 [VALIDATION.md](VALIDATION.md)의 남은 항목입니다.
+
+## v2 바이럴 개편 배포 준비 (2026-10-17)
+
+- 빌드가 `dist/t/<slug>/index.html` 16개를 만듭니다(`vite.config.ts`의 `lucian-character-pages` 플러그인). 각 페이지는 같은 앱을 불러오되 제목·설명·`og:image`(`/tci/og/<slug>.png`)·canonical만 그 캐릭터 것으로 바꿉니다. 점수는 들어가지 않습니다.
+- `vercel.json`에 `/tci/t/:slug/` → `/t/:slug/index.html` rewrite를 추가했습니다. 기존 `lucianlabs.dev` 프로젝트의 `/tci/(.*)` 프록시 규칙은 그대로 이 경로를 전달하므로 변경이 필요 없습니다.
+- 링크 미리보기 이미지 17개(`public/og.png`, `public/og/*.png`)는 커밋하는 정적 자산입니다. 캐릭터 문구나 디자인을 바꾸면 `npm run dev` 후 `node scripts/generate-og.mjs`로 다시 만듭니다.
+- 로컬 프로덕션 빌드(`vite preview`)에서 `/tci/t/curious-cat/` 200·캐릭터 제목과 `og:image`, `/tci/og/curious-cat.png` 200, `/tci/fonts/noto-kr-800.woff2` 200을 확인했습니다.
+- 운영 반영(push → Vercel 배포)과 운영 주소 검증은 사용자 확인 후 진행하며, 이 문서에 결과를 추가합니다.

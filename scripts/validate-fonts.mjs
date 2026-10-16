@@ -19,5 +19,5 @@ for (const font of manifest.fonts) {
   const missing = [...required].filter(cp=>!present.has(cp));
   if (missing.length) throw new Error(`Regenerate fonts with scripts/subset-fonts.py; ${font.file} is missing: ${String.fromCodePoint(...missing)}`);
 }
-if(manifest.fonts.length!==2)throw new Error('Both 400 and 600 font assets are required.');
-console.log(`Fonts OK: ${required.size} Korean syllables covered at both weights; asset hashes match.`);
+if(JSON.stringify(manifest.fonts.map(f=>f.weight))!=='[400,600,800]')throw new Error('Font assets for weights 400, 600 and 800 are required.');
+console.log(`Fonts OK: ${required.size} Korean syllables covered at all three weights; asset hashes match.`);

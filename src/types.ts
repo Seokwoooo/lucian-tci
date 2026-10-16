@@ -36,4 +36,3 @@ export interface Domain {
 export interface SubscaleScore { code: string; domain: DomainCode; count: number; sum: number; mean: number }
 export interface DomainScore { code: DomainCode; mean: number; subscales: string[] }
 export interface ScoreResult { subscales: SubscaleScore[]; domains: DomainScore[]; answered: number }
-export interface Insight { code: string; title: string; text: string; mean: number; direction: 'high' | 'low' | 'middle' }

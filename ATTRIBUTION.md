@@ -1,6 +1,6 @@
 # 출처와 라이선스
 
-확인 기준일: 2026-10-16. 이 저장소의 직접 작성 코드·문서·독립 한국어 번역은 [MIT LICENSE](LICENSE)를 따른다. 아래 외부 자료와 글꼴·의존성의 라이선스는 별도 적용 범위를 유지한다.
+확인 기준일: 2026-10-16, 캐릭터·카드 요소 추가 2026-10-17. 이 저장소의 직접 작성 코드·문서·독립 한국어 번역은 [MIT LICENSE](LICENSE)를 따른다. 아래 외부 자료와 글꼴·의존성의 라이선스는 별도 적용 범위를 유지한다.
 
 ## IPIP 원문
 
@@ -12,6 +12,8 @@
 
 - #044 FAQ Accordion: `src/components/Accordion.tsx`, `src/components/lucian.css`에 React·접근성 동작과 프로젝트 디자인을 반영했다. [원본 HTML](https://github.com/Seokwoooo/lucian-uxui-prompt/blob/main/src/elements/044-faq-accordion.html) · [원본 보기](https://lucianlabs.dev/uxui-prompt/#044).
 - #083 Indeterminate Bar: `src/components/Progress.tsx`, `src/components/lucian.css`에 응답 완료 수를 보여 주는 형태로 적용했다. [원본 HTML](https://github.com/Seokwoooo/lucian-uxui-prompt/blob/main/src/elements/083-indeterminate-bar.html) · [원본 보기](https://lucianlabs.dev/uxui-prompt/#083).
+- #052 돌려 보는 멤버십 카드: `src/components/PersonaCard.tsx`, `src/components/lucian.css`의 캐릭터 카드에 적용했다. 끌어서 돌리기·눌러서 뒤집기·홀로그램 띠·기울기 모션 값을 유지하고, 카드 크기를 세로형 트레이딩 카드로 바꾸었으며 잠금 버튼은 쓰지 않는다. 홀로그램 띠는 안쪽 프레임 위에 보이도록 겹침 순서와 투명도를 조정했다. [원본 보기](https://lucianlabs.dev/uxui-prompt/#052).
+- #039 미끄러지는 알약 탭: `src/components/PillTabs.tsx`, `src/components/lucian.css`의 공유 카드 크기 선택(피드 4:5·스토리 9:16)에 적용했다. 알약 이동·좌우 방향키 이동은 유지하고, 데모 목록 대신 카드 미리보기가 이동 방향에서 들어오도록 바꾸었다. [원본 보기](https://lucianlabs.dev/uxui-prompt/#039).
 
 원본 저장소 LICENSE를 실제 확인했다. 정확한 원문 저작권은 `Copyright (c) 2026 Seokwoooo`, 라이선스는 MIT다. 원본 출처 주석을 해당 TSX·CSS에 유지하며 전체 허가·면책 문구는 동일 저작권의 [LICENSE](LICENSE)에 보존한다.
 
@@ -27,7 +29,7 @@
 
 ## 한국어 글꼴
 
-`public/fonts/noto-kr-400.woff2`와 `noto-kr-600.woff2`는 설치한 `@fontsource/noto-sans-kr@5.3.1`의 한국어 글꼴을 현재 소스·문항에 맞게 부분 집합으로 만든 자산이다. 실제 라이선스의 권리자 표기는 `Google Inc.`, 조건은 SIL Open Font License 1.1이다. 전체 원문은 [public/fonts/OFL.txt](public/fonts/OFL.txt)에 보존한다. 글꼴을 프로젝트 MIT로 재허가하지 않는다. 생성 출처와 코드포인트는 `public/fonts/coverage.json`, 재생성 절차는 `scripts/subset-fonts.py`에 있다.
+`public/fonts/noto-kr-400.woff2`, `noto-kr-600.woff2`, `noto-kr-800.woff2`는 설치한 `@fontsource/noto-sans-kr@5.3.1`의 한국어 글꼴을 현재 소스·문항에 맞게 부분 집합으로 만든 자산이다. 실제 라이선스의 권리자 표기는 `Google Inc.`, 조건은 SIL Open Font License 1.1이다. 전체 원문은 [public/fonts/OFL.txt](public/fonts/OFL.txt)에 보존한다. 글꼴을 프로젝트 MIT로 재허가하지 않는다. 생성 출처와 코드포인트는 `public/fonts/coverage.json`, 재생성 절차는 `scripts/subset-fonts.py`에 있다.
 
 ## 설치 파일에서 확인한 직접 의존성
 
@@ -40,7 +42,6 @@
 | `lucide-react` | 1.58.0 | ISC | 직접 의존성 |
 | `react` | 19.3.1 | MIT | 직접 의존성 |
 | `react-dom` | 19.3.1 | MIT | 직접 의존성 |
-| `zod` | 4.6.7 | MIT | 직접 의존성 |
 | `@axe-core/playwright` | 4.14.0 | MPL-2.0 | 개발·검증 도구 |
 | `@playwright/test` | 1.64.1 | Apache-2.0 | 개발·검증 도구 |
 | `@tailwindcss/vite` | 4.3.3 | MIT | 개발·검증 도구 |
@@ -186,3 +187,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## 캐릭터와 링크 미리보기 이미지
+
+16가지 캐릭터 이름·설명·그림(`src/data/personas.ts`, `src/lib/mascot.ts`)과 링크 미리보기 이미지(`public/og.png`, `public/og/*.png`)는 이 프로젝트에서 직접 만들었고 MIT로 공개한다. 그림은 외부 일러스트·아이콘 팩을 쓰지 않은 SVG 도형이다. 미리보기 이미지는 `scripts/generate-og.mjs`로 고정 예시 캐릭터를 캡처한 것이며 실제 사람의 결과가 아니다.

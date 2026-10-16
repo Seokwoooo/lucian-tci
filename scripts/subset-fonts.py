@@ -15,12 +15,12 @@ for path in sorted((ROOT / 'src').rglob('*')):
     if path.suffix in ('.ts', '.tsx', '.json'):
         text += path.read_text()
 text += (ROOT / 'index.html').read_text()
-text += '…–—−·×→↗ⅠⅡⅢⅣⅤ'
+text += '…–—−·×→↗ⅠⅡⅢⅣⅤ✦₩⁴'
 points = sorted({ord(char) for char in text})
 out = ROOT / 'public/fonts'
 out.mkdir(parents=True, exist_ok=True)
 generated = []
-for weight in (400, 600):
+for weight in (400, 600, 800):
     options = subset.Options()
     options.flavor = 'woff2'
     options.recalc_timestamp = False

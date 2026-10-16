@@ -1,0 +1,34 @@
+/* Development-only link-preview layouts (1200×630). */
+.og{position:fixed;inset:0;width:1200px;height:630px;overflow:hidden;background:#FFF7EC;color:#1D1B2F;font-family:"Noto Sans KR",sans-serif;display:flex;align-items:center;word-break:keep-all}
+.og h1{font-weight:800;letter-spacing:-.05em;line-height:1.05;margin:0}
+.og p{margin:0}
+.og-home{padding:0 0 0 70px}
+.og-home .og-copy{width:640px;position:relative;z-index:2}
+.og-eyebrow{display:inline-block;padding:6px 16px;border:2px solid #1D1B2F;border-radius:999px;background:#fff;box-shadow:3px 3px 0 #1D1B2F;font-size:19px;font-weight:600}
+.og-home h1{font-size:96px;margin:26px 0 22px}
+.og-home h1 .hl{position:relative;z-index:0}
+.og-home h1 .hl::after{content:"";position:absolute;left:-4px;right:-4px;bottom:6px;height:32px;background:#FFD23F;z-index:-1;border-radius:6px}
+.og-price{font-size:26px;font-weight:600;color:#4A4760}
+.og-price b{display:inline-block;margin-left:8px;padding:2px 16px;border:2px solid #1D1B2F;border-radius:12px;background:#FFD23F;color:#1D1B2F;font-size:30px;transform:rotate(-2deg)}
+.og-sub{margin-top:22px;font-size:26px;color:#4A4760}
+.og-sub b{color:#1D1B2F}
+.og-foot{margin-top:30px;font-size:19px;color:#67637D}
+.og-fan{position:absolute;right:-10px;top:0;width:560px;height:630px}
+.og-fan-card{position:absolute;top:50%;left:50%}
+.og-fan-card .static-card{--cw:250px}
+.og-fan-card.f0{transform:translate(-110%,-46%) rotate(-11deg)}
+.og-fan-card.f1{transform:translate(-46%,-54%) rotate(3deg);z-index:2}
+.og-fan-card.f2{transform:translate(14%,-42%) rotate(12deg)}
+.og-persona{background:color-mix(in srgb,var(--pc) 22%,#FFF7EC);padding:0 64px;gap:48px}
+.og-art{flex:none;width:430px;height:430px;border-radius:44px;border:4px solid #1D1B2F;background:#fff;box-shadow:12px 14px 0 #1D1B2F;display:grid;place-items:center}
+.og-mascot{display:block;width:400px;height:400px}
+.og-mascot svg{width:100%;height:100%}
+.og-persona .og-copy{flex:1;min-width:0}
+.og-persona .og-eyebrow{font-size:17px}
+.og-kicker{margin-top:24px;font-size:28px;font-weight:600;color:#4A4760}
+.og-persona h1{font-size:92px;margin:6px 0 14px}
+.og-tagline{font-size:26px;line-height:1.45;color:#1D1B2F}
+.og-chips{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.og-chips li{padding:5px 14px;border-radius:999px;border:2px solid #1D1B2F;background:#fff;font-size:18px;font-weight:700}
+.og-persona .og-foot{margin-top:26px;font-size:19px;color:#4A4760}
+.og-persona .og-foot b{color:#1D1B2F;margin-right:6px}
